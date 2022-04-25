@@ -1,19 +1,30 @@
 <!doctype html>
 <html>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
    <body>
       <p>Thank you {{ username }}, here are the air pollutant concentrations:</p>
-      <table border = 1>
+      <table style="width:50%">
          <tr>
-            <th><p> Ozone <p></th>
+            <th> Pollutant </th>
+            <th> Concentration </th>
+            <th> AQI </th>
+         </tr>
+            <th> Ozone </th>
             <td> {{ ozone }} ppb </td>
-         </tr>
+            <td> AQI Calc </td>
          <tr>
-            <th><p> PM 2.5 <p></th>
+            <th> PM 2.5 </th>
             <td> {{ pm25 }} ppm </td>
+            <td> AQI Calc </td>
          </tr>
          <tr>
-            <th><p> PM 10 <p></th>
+            <th> PM 10 </th>
             <td> {{ pm10 }} ppm </td>
+            <td> AQI Calc </td>
          </tr>
       </table>
    </body>
