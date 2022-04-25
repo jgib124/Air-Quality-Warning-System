@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
    <body>
-      <form action = "http://localhost:5000/table/{name}" method = "post">
-         <p>Enter Pollutant Concentrations:</p>
+      <form action = "http://localhost:5000/pollutants/{{ name }}" method = "post">
+         <p>Hello {{ name }}, please enter pollutant concentrations:</p>
+         <p>Ozone (ppb):</p>
          <p><input type = "number" name = "oz" /></p>
-         <p>Enter PM 2.5 Concentration:</p>
+         <p>PM 2.5 Concentration (ppm):</p>
          <p><input type = "number" name = "pm25" /></p>
-         <p>Enter PM10 Concentration:</p>
+         <p>PM10 Concentration (ppm):</p>
          <p><input type = "number" name = "pm10" /></p>
          <p><input type = "submit" value = "submit" /></p>
       </form>

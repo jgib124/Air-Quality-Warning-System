@@ -1,19 +1,19 @@
 <!doctype html>
 <html>
    <body>
-      <p>Hello {{ username }}, here is the Air Pollution:</p>
+      <p>Thank you {{ username }}, here are the air pollutant concentrations:</p>
       <table border = 1>
          <tr>
             <th><p> Ozone <p></th>
-            <td> ozone </td>
+            <td> {{ ozone }} ppb </td>
          </tr>
          <tr>
             <th><p> PM 2.5 <p></th>
-            <td> pm25 </td>
+            <td> {{ pm25 }} ppm </td>
          </tr>
          <tr>
             <th><p> PM 10 <p></th>
-            <td> pm10 </td>
+            <td> {{ pm10 }} ppm </td>
          </tr>
       </table>
    </body>

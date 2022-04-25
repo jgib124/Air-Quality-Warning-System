@@ -55,33 +55,34 @@ def print_num(coolNum):
 def login():
     if request.method == 'POST':
         user = request.form['usr']
-        return redirect(url_for('generate_table', name=user))
+        return render_template('pollutants.html', name=user)
     else:
         user = request.args.get('usr')
-        return redirect(url_for('generate_table', name=user))
+        return render_template('pollutants.html', name=user)
 
 '''
 - render_template() function allows Jinja2 template to rend HTML files within python file
 
 '''
 @app.route('/pollutants/<name>', methods=['POST', 'GET'])
-def generate_table(name):
+def table_inputs(name):
     if request.method == 'POST':
         ozone_input = request.form['oz']
         pm25_input = request.form['pm25']
         pm10_input = request.form['pm10']
-        return render_template('table.html', template_folder='html', username=name, ozone=ozone_input,
-                               pm25=pm25_input, pm10=pm10_input)
+        return redirect(url_for('generate_table', name=name, ozone_in=ozone_input,
+                                pm25_in=pm25_input, pm10_in=pm10_input))
     else:
         ozone_input = request.args.get('oz')
         pm25_input = request.args.get('pm25')
         pm10_input = request.args.get('pm10')
-        return render_template('table.html', template_folder='html', username=name, ozone=ozone_input,
-                               pm25=pm25_input, pm10=pm10_input)
+        return redirect(url_for('generate_table', name=name, ozone_in=ozone_input,
+                                pm25_in=pm25_input, pm10_in=pm10_input))
 
-
-
-
+@app.route('/table/<name>_<float:ozone_in>_<float:pm25_in>_<float:pm10_in>')
+def generate_table(name, ozone_in, pm25_in, pm10_in):
+    return render_template('table.html', username = name, ozone = ozone_in,
+                           pm25 = pm25_in, pm10 = pm10_in)
 
 '''
 - run() method runs the app on local development server
