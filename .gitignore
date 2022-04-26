@@ -1,5 +1,7 @@
 raw_data/
 processed_data/
+gallery/
 *.csv
 .ipynb_checkpoints
-.idea				
+.idea/
+__pycache__/				

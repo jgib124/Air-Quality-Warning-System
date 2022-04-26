@@ -1,4 +1,5 @@
 from flask import Flask, redirect, url_for, request, render_template
+import aqi
 
 # Constructor Flask() takes the current module's name __name__ as argument
 app = Flask(__name__)
@@ -12,35 +13,6 @@ app = Flask(__name__)
 - route(rule, options) where rule is the URL that is bind to the function
 - options is a list of parameters that can be forwards to the rule object
 '''
-@app.route('/')
-def hello_world():
-    return 'Hello World'
-
-# Variables can be included in the URL routing using <>
-@app.route('/hello/<name>')
-def hello_name(name):
-    return f"Hello {name}"
-
-# Variables can be ints, floats, or paths, but that must be specified within <>
-@app.route('/numbers/evens/<int:num>')
-def even_num(num):
-    return f"This is even: {num}"
-
-@app.route('/numbers/odds/<int:num>')
-def odd_num(num):
-    return f"This is odd: {num}"
-
-
-'''
-- url_for() function accepts the name of another function as parameter
-- accepts keyword arguments as variables for url
-'''
-@app.route('/numbers/<int:coolNum>')
-def print_num(coolNum):
-    if (coolNum % 2) == 0:
-        return redirect(url_for('even_num', num=coolNum))
-    else:
-        return redirect(url_for('odd_num', num=coolNum))
 
 '''
 - HTTP methods (GET, POST, etc.) can be specified in route()
@@ -81,8 +53,10 @@ def table_inputs(name):
 
 @app.route('/table/<name>_<float:ozone_in>_<float:pm25_in>_<float:pm10_in>')
 def generate_table(name, ozone_in, pm25_in, pm10_in):
+    o3_aqi_val = aqi.o3_aqi(ozone_in)
+
     return render_template('table.html', username = name, ozone = ozone_in,
-                           pm25 = pm25_in, pm10 = pm10_in)
+                           o3_aqi = o3_aqi_val, pm25 = pm25_in, pm10 = pm10_in)
 
 '''
 - run() method runs the app on local development server
